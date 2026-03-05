@@ -57,11 +57,40 @@ async function init() {
   renderApellidoList();
   setupSearch();
 
+  setupMobileNav();
+
   // Fix map sizing after layout
   setTimeout(() => {
     prMap.invalidateSize();
     spainMap.invalidateSize();
   }, 100);
+}
+
+// Mobile navigation
+function setupMobileNav() {
+  const container = document.querySelector('.main-container');
+  container.setAttribute('data-view', 'map');
+
+  document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      container.setAttribute('data-view', view);
+
+      document.querySelectorAll('.mobile-nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Invalidate map sizes when switching to a view with a map
+      setTimeout(() => {
+        if (view === 'map') spainMap.invalidateSize();
+        if (view === 'regions') prMap.invalidateSize();
+      }, 350);
+    });
+  });
+}
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
 function initPRMap() {
@@ -299,6 +328,16 @@ function renderApellidoList() {
 }
 
 function showDetail(a) {
+  // On mobile, switch to map view to show overlay
+  if (window.innerWidth <= 768) {
+    const container = document.querySelector('.main-container');
+    container.setAttribute('data-view', 'map');
+    document.querySelectorAll('.mobile-nav-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.view === 'map');
+    });
+    setTimeout(() => spainMap.invalidateSize(), 350);
+  }
+
   const overlay = document.querySelector('.detail-overlay');
   overlay.classList.add('visible');
 
@@ -343,6 +382,16 @@ function showDetail(a) {
 
 function closeDetail() {
   document.querySelector('.detail-overlay').classList.remove('visible');
+}
+
+function togglePRMap() {
+  const map = document.getElementById('pr-map');
+  const btn = document.querySelector('.toggle-pr-map');
+  map.classList.toggle('hidden');
+  btn.classList.toggle('collapsed');
+  if (!map.classList.contains('hidden')) {
+    setTimeout(() => prMap.invalidateSize(), 350);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);

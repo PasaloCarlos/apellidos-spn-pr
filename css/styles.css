@@ -58,8 +58,8 @@ header h1 span {
   height: calc(100vh - 60px);
 }
 
-/* Left panel - Spain map */
-.spain-panel {
+/* Left panel */
+.side-panel {
   width: 280px;
   background: #16213e;
   border-right: 1px solid #2a2a4a;
@@ -68,16 +68,47 @@ header h1 span {
   flex-shrink: 0;
 }
 
-.spain-panel h3 {
+.side-panel h3 {
   padding: 12px 16px 8px;
   font-size: 0.9rem;
   color: #e94560;
   border-bottom: 1px solid #2a2a4a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-pr-map {
+  background: #0f3460;
+  border: 1px solid #e94560;
+  color: #e94560;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: transform 0.3s;
+  line-height: 1;
+}
+
+.toggle-pr-map:hover {
+  background: #e94560;
+  color: #fff;
+}
+
+.toggle-pr-map.collapsed {
+  transform: rotate(180deg);
 }
 
 #pr-map {
   height: 260px;
   background: #0f3460;
+  flex-shrink: 0;
+  transition: height 0.3s ease;
+  overflow: hidden;
+}
+
+#pr-map.hidden {
+  height: 0;
 }
 
 .region-list {
@@ -289,6 +320,11 @@ header h1 span {
   margin-top: 2px;
 }
 
+/* Mobile bottom nav - hidden on desktop */
+.mobile-nav {
+  display: none;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -341,4 +377,192 @@ header h1 span {
   font-weight: 600;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
   white-space: nowrap;
+}
+
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+  header {
+    height: 50px;
+    padding: 8px 16px;
+  }
+
+  header h1 {
+    font-size: 1rem;
+  }
+
+  .chapter-nav button {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+
+  .main-container {
+    height: calc(100vh - 50px - 56px); /* header + bottom nav */
+    position: relative;
+  }
+
+  /* Stack panels, show one at a time */
+  .side-panel,
+  .map-panel,
+  .data-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: transform 0.3s ease;
+  }
+
+  .side-panel {
+    transform: translateX(-100%);
+    z-index: 2;
+  }
+
+  .map-panel {
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  .data-panel {
+    transform: translateX(100%);
+    z-index: 2;
+  }
+
+  /* Active views */
+  .main-container[data-view="regions"] .side-panel {
+    transform: translateX(0);
+    z-index: 3;
+  }
+
+  .main-container[data-view="map"] .map-panel {
+    transform: translateX(0);
+  }
+
+  .main-container[data-view="list"] .data-panel {
+    transform: translateX(0);
+    z-index: 3;
+  }
+
+  .side-panel {
+    width: 100%;
+  }
+
+  .side-panel h3 {
+    padding: 10px 16px;
+  }
+
+  #pr-map {
+    height: 200px;
+  }
+
+  .data-panel {
+    width: 100%;
+  }
+
+  /* Detail overlay on mobile */
+  .detail-overlay {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    padding: 16px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .detail-overlay .close-btn {
+    font-size: 1.5rem;
+    top: 10px;
+    right: 14px;
+    padding: 4px 8px;
+  }
+
+  /* Bottom navigation */
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #16213e;
+    border-top: 2px solid #2a2a4a;
+    z-index: 100;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4px 0;
+  }
+
+  .mobile-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.65rem;
+    cursor: pointer;
+    padding: 6px 16px;
+    border-radius: 8px;
+    transition: color 0.2s;
+  }
+
+  .mobile-nav-btn.active {
+    color: #e94560;
+  }
+
+  .mobile-nav-btn svg {
+    opacity: 0.6;
+  }
+
+  .mobile-nav-btn.active svg {
+    opacity: 1;
+  }
+
+  /* Search/filter tweaks */
+  .search-box {
+    padding: 10px;
+  }
+
+  .search-box input {
+    font-size: 16px; /* prevents zoom on iOS */
+  }
+
+  .filters {
+    padding: 8px 10px;
+  }
+
+  .filters select {
+    flex: 1;
+    font-size: 14px; /* prevents zoom on iOS */
+  }
+
+  .apellido-card {
+    padding: 12px;
+  }
+
+  .apellido-card .name {
+    font-size: 1rem;
+  }
+
+  .apellido-card .meta {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 0.9rem;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
 }

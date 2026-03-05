@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#1a1a2e"/>
+  <rect x="40" y="40" width="432" height="432" rx="48" fill="#16213e" stroke="#e94560" stroke-width="8"/>
+  <text x="256" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#e94560">PR</text>
+  <text x="256" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="36" fill="#e0e0e0">Apellidos</text>
+  <line x1="120" y1="320" x2="392" y2="320" stroke="#e94560" stroke-width="4"/>
+  <text x="256" y="370" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#888">SPN</text>
+</svg>

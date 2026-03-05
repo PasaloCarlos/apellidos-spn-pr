@@ -1,0 +1,17 @@
+{
+  "name": "Apellidos de Puerto Rico",
+  "short_name": "Apellidos PR",
+  "description": "Mapa interactivo de apellidos de Puerto Rico y sus origenes en Espana",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#e94560",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
