@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apellidos de Puerto Rico - Cap. 1: Espana</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Apellidos de <span>Puerto Rico</span></h1>
+    <div class="chapter-nav">
+      <button class="active">Cap. 1: Espana</button>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Left: PR map + region list -->
+    <div class="spain-panel">
+      <h3>Puerto Rico</h3>
+      <div id="pr-map"></div>
+      <div class="region-list"></div>
+    </div>
+
+    <!-- Center: Spain map -->
+    <div class="map-panel">
+      <div id="spain-map"></div>
+      <div class="detail-overlay">
+        <button class="close-btn" onclick="closeDetail()">&times;</button>
+        <h2></h2>
+        <div class="detail-grid"></div>
+      </div>
+    </div>
+
+    <!-- Right: Data panel -->
+    <div class="data-panel">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar apellido..." />
+      </div>
+      <div class="filters">
+        <select id="filter-origen">
+          <option value="">Todos los origenes</option>
+        </select>
+        <select id="filter-sort">
+          <option value="nombre">Ordenar: A-Z</option>
+          <option value="rango">Ordenar: Rango</option>
+          <option value="poblacion">Ordenar: Poblacion PR</option>
+        </select>
+      </div>
+      <div class="results-header">Cargando...</div>
+      <div class="apellido-list"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
