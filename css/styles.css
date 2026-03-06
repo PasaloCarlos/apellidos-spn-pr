@@ -142,17 +142,49 @@ header h1 span {
   border-radius: 10px;
   min-width: 24px;
   text-align: center;
+  flex-shrink: 0;
+}
+
+.region-name-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.region-total {
+  font-size: 0.65rem;
+  color: #666;
+  font-weight: normal;
 }
 
 /* Center - Spain map */
 .map-panel {
   flex: 1;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-bar {
+  display: flex;
+  gap: 16px;
+  padding: 6px 16px;
+  background: #0f3460;
+  border-bottom: 1px solid #2a2a4a;
+  font-size: 0.75rem;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.stats-bar span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 #spain-map {
   width: 100%;
-  height: 100%;
+  flex: 1;
 }
 
 /* Right panel - Data */
@@ -259,6 +291,36 @@ header h1 span {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.multi-region {
+  background: #f5a623;
+  color: #000;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 8px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.share-btn {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.share-btn:hover {
+  background: #c73550;
+}
+
+.detail-share {
+  grid-column: 1 / -1;
 }
 
 /* Detail overlay */
@@ -461,25 +523,52 @@ header h1 span {
 
   /* Detail overlay on mobile */
   .detail-overlay {
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
     max-width: none;
-    padding: 16px;
-    max-height: 60vh;
+    padding: 10px 12px;
+    max-height: 45vh;
     overflow-y: auto;
   }
 
+  .detail-overlay h2 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
   .detail-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px 8px;
+  }
+
+  .detail-item .label {
+    font-size: 0.55rem;
+  }
+
+  .detail-item .value {
+    font-size: 0.75rem;
+    margin-top: 1px;
+  }
+
+  .detail-item {
+    padding: 2px 0;
+  }
+
+  .detail-share {
+    grid-column: 1 / -1;
   }
 
   .detail-overlay .close-btn {
     font-size: 1.5rem;
-    top: 10px;
-    right: 14px;
+    top: 4px;
+    right: 10px;
     padding: 4px 8px;
+  }
+
+  .share-btn {
+    padding: 4px 10px;
+    font-size: 0.7rem;
   }
 
   /* Bottom navigation */
